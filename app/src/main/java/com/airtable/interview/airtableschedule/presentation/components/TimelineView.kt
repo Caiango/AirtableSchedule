@@ -1,6 +1,7 @@
 package com.airtable.interview.airtableschedule.presentation.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,10 +24,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.airtable.interview.airtableschedule.models.Event
 import com.airtable.interview.airtableschedule.models.SampleTimelineItems
+import com.airtable.interview.airtableschedule.models.addDays
 import com.airtable.interview.airtableschedule.models.assignLanes
 import com.airtable.interview.airtableschedule.models.daysBetween
 import com.airtable.interview.airtableschedule.presentation.DummyEventListener
@@ -91,6 +94,13 @@ fun TimelineView(
                         .height(72.dp)
                         .clip(RoundedCornerShape(6.dp))
                         .background(Color(0xFFE0E0E7))
+                        .pointerInput(Unit) {
+                            detectTapGestures { offset ->
+                                val dayOffset = (offset.x / baseDayWidth.toPx()).toInt()
+                                val eventDate = addDays(minDate, dayOffset)
+                                listener.onEmptySpaceClick(eventDate)
+                            }
+                        }
                 ) {
                     laneEvents.forEach { event ->
                         val startOffsetDays = daysBetween(minDate, event.startDate)

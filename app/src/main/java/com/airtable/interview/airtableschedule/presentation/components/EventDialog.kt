@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,9 +37,10 @@ fun EventDialog(
         ),
         onDismissRequest = {},
         title = {
-            TextField(
+            OutlinedTextField(
                 value = title,
                 onValueChange = { title = it },
+                label = { Text("Title") },
                 singleLine = true
             )
         },
