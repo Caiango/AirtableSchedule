@@ -24,7 +24,6 @@ import com.airtable.interview.airtableschedule.models.SampleTimelineItems
 import com.airtable.interview.airtableschedule.models.formatDateShort
 import com.airtable.interview.airtableschedule.presentation.DummyEventListener
 import com.airtable.interview.airtableschedule.presentation.EventListener
-import com.airtable.interview.airtableschedule.presentation.randomColor
 
 @Composable
 fun EventItem(
@@ -41,7 +40,7 @@ fun EventItem(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(randomColor.random()),
+                .background(event.color),
             contentAlignment = Alignment.CenterStart
         ) {
             Column(modifier = Modifier.padding(horizontal = 8.dp)) {
